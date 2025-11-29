@@ -54,7 +54,7 @@ const useGraph = create<Graph & GraphActions>((set, get) => ({
 
     if (nodes.length > SUPPORTED_LIMIT) {
       return set({
-        aboveSupportedLimit: true,
+        aboveSupportedLimit: false,
         ...options,
         loading: false,
       });

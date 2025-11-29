@@ -2,6 +2,7 @@ import debounce from "lodash.debounce";
 import { event as gaEvent } from "nextjs-google-analytics";
 import { toast } from "react-hot-toast";
 import { create } from "zustand";
+import exampleJson from "../data/example.json";
 import { FileFormat } from "../enums/file.enum";
 import useGraph from "../features/editor/views/GraphView/stores/useGraph";
 import { isIframe } from "../lib/utils/helpers";
@@ -9,48 +10,7 @@ import { contentToJson, jsonToContent } from "../lib/utils/jsonAdapter";
 import useConfig from "./useConfig";
 import useJson from "./useJson";
 
-const defaultJson = JSON.stringify(
-  {
-    appName: "JSON Crack",
-    author: "Aykut Saraç",
-    launched: 2022,
-    openSource: true,
-    stars: 34633,
-    upgrade: {
-      appName: "ToDiagram",
-      detail: "New powerful JSON editor.",
-      website: "https://todiagram.com",
-      brandColor: "#fe5e49",
-      paid: true,
-    },
-    milestones: [
-      {
-        title: "Launch",
-        year: 2022,
-      },
-      {
-        title: "10K Stars",
-        date: 2022,
-      },
-      {
-        title: "20K Stars",
-        date: 2023,
-      },
-      {
-        title: "30K Stars",
-        date: 2024,
-      },
-    ],
-    social: {
-      github: "https://github.com/AykutSarac/jsoncrack.com",
-      twitter: "https://x.com/jsoncrack",
-      linkedin: "https://linkedin.com/company/todiagram",
-    },
-    images: ["https://jsoncrack.com/assets/192.png"],
-  },
-  null,
-  2
-);
+const defaultJson = JSON.stringify(exampleJson, null, 2);
 
 type SetContents = {
   contents?: string;
@@ -108,7 +68,7 @@ const isURL = (value: string) => {
 const debouncedUpdateJson = debounce((value: unknown) => {
   useGraph.getState().setLoading(true);
   useJson.getState().setJson(JSON.stringify(value, null, 2));
-}, 800);
+}, 400);
 
 const useFile = create<FileStates & JsonActions>()((set, get) => ({
   ...initialStates,

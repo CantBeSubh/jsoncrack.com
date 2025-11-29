@@ -76,13 +76,15 @@ const TextEditor = () => {
     <StyledEditorWrapper>
       <StyledWrapper>
         <Editor
+          className="sentry-mask"
+          data-sentry-mask="true"
           height="100%"
           language={fileType}
           theme={theme}
           value={contents}
           options={editorOptions}
           onMount={handleMount}
-          onValidate={errors => setError(errors[0]?.message)}
+          onValidate={errors => setError(errors[0]?.message || "")}
           onChange={contents => setContents({ contents, skipUpdate: true })}
           loading={<LoadingOverlay visible />}
         />
@@ -102,7 +104,7 @@ const StyledEditorWrapper = styled.div`
 
 const StyledWrapper = styled.div`
   display: grid;
-  height: calc(100vh - 67px);
+  height: 100%;
   grid-template-columns: 100%;
   grid-template-rows: minmax(0, 1fr);
 `;

@@ -10,7 +10,6 @@ import { useLongPress } from "use-long-press";
 import useConfig from "../../../../store/useConfig";
 import { CustomEdge } from "./CustomEdge";
 import { CustomNode } from "./CustomNode";
-import { NotSupported } from "./NotSupported";
 import { OptionsMenu } from "./OptionsMenu";
 import { SecureInfo } from "./SecureInfo";
 import { ZoomControl } from "./ZoomControl";
@@ -139,7 +138,6 @@ const GraphCanvas = ({ isWidget }: GraphProps) => {
 export const GraphView = ({ isWidget = false }: GraphProps) => {
   const setViewPort = useGraph(state => state.setViewPort);
   const viewPort = useGraph(state => state.viewPort);
-  const aboveSupportedLimit = useGraph(state => state.aboveSupportedLimit);
   const loading = useGraph(state => state.loading);
   const gesturesEnabled = useConfig(state => state.gesturesEnabled);
   const rulersEnabled = useConfig(state => state.rulersEnabled);
@@ -168,7 +166,6 @@ export const GraphView = ({ isWidget = false }: GraphProps) => {
 
   return (
     <Box pos="relative" h="100%" w="100%">
-      {/* {aboveSupportedLimit && <NotSupported />} */}
       <LoadingOverlay visible={debouncedLoading} />
       {!isWidget && <OptionsMenu />}
       {!isWidget && <SecureInfo />}

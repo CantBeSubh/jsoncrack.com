@@ -19,7 +19,7 @@ const JSONSchemaTool = () => {
   const [jsonSchema, setJsonSchema] = React.useState("");
 
   React.useEffect(() => {
-    monacoRef.current?.languages.json.jsonDefaults.setDiagnosticsOptions({
+    (monacoRef.current as any)?.json?.jsonDefaults.setDiagnosticsOptions({
       validate: true,
       allowComments: true,
       enableSchemaRequest: true,

@@ -32,7 +32,7 @@ const TextEditor = () => {
   const fileType = useFile(state => state.format);
 
   React.useEffect(() => {
-    monaco?.languages.json.jsonDefaults.setDiagnosticsOptions({
+    monaco?.json?.jsonDefaults.setDiagnosticsOptions({
       validate: true,
       allowComments: true,
       enableSchemaRequest: true,
@@ -46,7 +46,7 @@ const TextEditor = () => {
         ],
       }),
     });
-  }, [jsonSchema, monaco?.languages.json.jsonDefaults]);
+  }, [jsonSchema, monaco?.json?.jsonDefaults]);
 
   React.useEffect(() => {
     const beforeunload = (e: BeforeUnloadEvent) => {
